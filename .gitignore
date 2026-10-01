@@ -1,0 +1,86 @@
+# Java related
+target/**
+*.jar
+*.war
+*.ear
+*.class
+
+# eclipse specific
+*.pydevproject
+#.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+**/target/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+RemoteSystemsTempFiles/
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+### STS ###
+HELP.md
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+.apt_generated
+.factorypath
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# SonarQube
+.sonar/
+.sonarqube/
+.scannerwork/
+sonar-scan.cmd
+
+### VS Code ###
+.vscode/
+.history/*
+**/node_modules/
+
+# Node
+/node_modules
+npm-debug.log
+yarn-error.log
+
+# Miscellaneous
+/.angular/cache
+.sass-cache/
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
+__screenshots__/
+kk/**
+libraries/**
+*.pptx
+**/jasmine-vitest-*.md
