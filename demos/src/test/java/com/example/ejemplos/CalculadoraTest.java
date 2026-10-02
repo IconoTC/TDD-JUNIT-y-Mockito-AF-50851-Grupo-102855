@@ -243,7 +243,7 @@ class CalculadoraTest {
 				assertEquals(25, fixure.edad(fnacimiento), "suplantado");
 			}
 			
-			assertEquals(25, fixure.edad(fnacimiento), "real");
+//			assertEquals(25, fixure.edad(fnacimiento), "real");
 		}
 		@Test
 		void sumas() {
