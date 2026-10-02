@@ -5,9 +5,15 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTimeout;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.anyDouble;
+import static org.mockito.Mockito.CALLS_REAL_METHODS;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.when;
 
 import java.lang.reflect.InvocationTargetException;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.AfterAll;
@@ -30,7 +36,7 @@ import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.junit.jupiter.params.provider.ValueSources;
+import org.mockito.MockedStatic;
 
 import com.example.test.anotations.Smoke;
 import com.example.test.anotations.UnitTest;
@@ -192,7 +198,7 @@ class CalculadoraTest {
 	}
 
 	@Nested
-	@Order(1)
+	@Order(2)
 	class Otros {
 		@Test()
 		void metodo_privado() throws NoSuchMethodException, SecurityException, IllegalAccessException, InvocationTargetException {
@@ -222,6 +228,54 @@ class CalculadoraTest {
 			void ko(int caso) {
 				assertFalse(fixure.esBisiesto(caso));
 			}
+		}
+	}
+	@Nested
+	@Order(1)
+	class Simulaciones {
+		@Test
+		void tempodependiente() {
+			var fnacimiento = LocalDate.of(2000, 10, 1);
+			
+			LocalDate hoy = LocalDate.of(2026, 01, 1);
+			try (MockedStatic<LocalDate> mocked = mockStatic(LocalDate.class, CALLS_REAL_METHODS)) {
+				mocked.when(LocalDate::now).thenReturn(hoy);
+				assertEquals(25, fixure.edad(fnacimiento), "suplantado");
+			}
+			
+			assertEquals(25, fixure.edad(fnacimiento), "real");
+		}
+		@Test
+		void sumas() {
+			var doble = mock(Calculadora.class);
+//			when(doble.suma(2, 2)).thenReturn(3.0).thenReturn(4.0).thenReturn(1.0);
+			when(doble.suma(anyDouble(), anyDouble())).thenReturn(3.0).thenReturn(4.0).thenReturn(1.0);
+			when(doble.divide(anyDouble(), anyDouble())).thenCallRealMethod();
+			assertEquals(3, doble.suma(2,2));
+			assertEquals(4, doble.suma(2,2));
+			assertEquals(1, doble.suma(2,2));
+			assertEquals(1, doble.suma(2,2));
+			assertEquals(0.5, doble.divide(1.0,2));
+//			assertEquals(3, doble.suma(1,2), "Forzado");
+		}
+
+		@Nested
+		@Order(1)
+		class Bisiesto {
+			@ParameterizedTest(name = "El año {0} ES bisiesto")
+			@ValueSource(ints = {2024, 2000, 0})
+			void ok(int caso) {
+				var doble = mock(Calculadora.class);
+				when(doble.esBisiesto(2024)).thenReturn(true);
+				when(doble.esBisiesto(2000)).thenReturn(true);
+				when(doble.esBisiesto(0)).thenReturn(true);
+				assertTrue(doble.esBisiesto(caso));
+			}
+//			@ParameterizedTest(name = "El año {0} NO ES bisiesto")
+//			@ValueSource(ints = {2023, 1900})
+//			void ko(int caso) {
+//				assertFalse(fixure.esBisiesto(caso));
+//			}
 		}
 	}
 }

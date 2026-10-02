@@ -2,6 +2,8 @@ package com.example.ejemplos;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.function.BooleanSupplier;
 
 public class Calculadora {
@@ -55,5 +57,9 @@ public class Calculadora {
 	}
 	private boolean esMultiploDe4(int año) {
 		return año % 4 == 0;
+	}
+	
+	public byte edad(LocalDate dia) {
+		return (byte) ChronoUnit.YEARS.between(dia, LocalDate.now());
 	}
 }
