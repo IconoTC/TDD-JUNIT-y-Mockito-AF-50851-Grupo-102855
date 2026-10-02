@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Tag;
 @Retention(RUNTIME)
 @Target({ TYPE, METHOD })
 @Tag("smoke")
+@Tag("humo")
 public @interface Smoke {
 
 }
