@@ -7,9 +7,10 @@
   - *Help > Eclipse Marketplace ... > [Spring Tools (aka Spring Tool Suite)](https://marketplace.eclipse.org/content/spring-tools-aka-spring-tool-suite)*
   - *[Project Lombok](https://projectlombok.org/downloads/lombok.jar)*
 
-## Kata
+## Kata y ejemplos
 
 - [GildedRose](https://github.com/emilybache/GildedRose-Refactoring-Kata/blob/main/GildedRoseRequirements_es.md)
+- [Pet Clinic (Spring)](https://github.com/spring-projects/spring-petclinic)
 
 ## Contenedores (instalación opcional)
 
